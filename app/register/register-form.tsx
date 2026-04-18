@@ -166,8 +166,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Iid="password"
-                        nput
+                      <Input
+                        id="password"
                         type="password"
                         autoComplete="new-password"
                         placeholder="Create a password"
