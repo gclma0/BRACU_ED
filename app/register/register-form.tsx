@@ -90,16 +90,28 @@ export default function RegisterForm() {
                         className="flex  space-y-1"
                       >
                         <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="STUDENT" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Student</FormLabel>
+                          <RadioGroupItem
+                            id="userRole-student"
+                            value="STUDENT"
+                          />
+                          <label
+                            htmlFor="userRole-student"
+                            className="font-normal"
+                          >
+                            Student
+                          </label>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="FACULTY" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Faculty</FormLabel>
+                          <RadioGroupItem
+                            id="userRole-faculty"
+                            value="FACULTY"
+                          />
+                          <label
+                            htmlFor="userRole-faculty"
+                            className="font-normal"
+                          >
+                            Faculty
+                          </label>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -115,7 +127,11 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
+                      <Input
+                        autoComplete="name"
+                        placeholder="Enter your name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -131,6 +147,7 @@ export default function RegisterForm() {
                     <FormControl>
                       <Input
                         type="email"
+                        autoComplete="email"
                         placeholder="Enter your email"
                         {...field}
                       />
@@ -149,6 +166,7 @@ export default function RegisterForm() {
                     <FormControl>
                       <Input
                         type="password"
+                        autoComplete="new-password"
                         placeholder="Create a password"
                         {...field}
                       />

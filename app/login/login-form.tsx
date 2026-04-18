@@ -77,6 +77,7 @@ export default function LogInForm() {
                     <FormControl>
                       <Input
                         type="email"
+                        autoComplete="email"
                         placeholder="Enter your email"
                         {...field}
                       />
@@ -95,6 +96,7 @@ export default function LogInForm() {
                     <FormControl>
                       <Input
                         type="password"
+                        autoComplete="current-password"
                         placeholder="Create a password"
                         {...field}
                       />
