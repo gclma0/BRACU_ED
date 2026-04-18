@@ -1,6 +1,5 @@
 "use server";
 import { signIn } from "@/auth";
-import { db } from "@/lib/prisma";
 import {
   signInFormSchema,
   TSignInFormSchema,
@@ -17,7 +16,7 @@ export async function LogInAction(values: TSignInFormSchema) {
     const { email, password } = validation.data;
 
     // Attempt to sign in without redirect
-    const result = await signIn("credentials", {
+    await signIn("credentials", {
       email,
       password,
       redirect: false,
