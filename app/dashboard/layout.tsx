@@ -19,6 +19,13 @@ export default async function DashboardLayout({
       <div className="hidden lg:block">
         <DashboardSidebar />
       </div>
+      <div className="flex-1 lg:ml-64">
+        <main className="p-6">{children}</main>
+      </div>
+    </div>
+  );
+}
+      </div>
       <main className="py-6 px-4 sm:px-6 lg:px-8 flex-1 lg:ml-64">
         {children}
       </main>
