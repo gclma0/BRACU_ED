@@ -9,9 +9,9 @@ interface SearchParams {
 export default async function TakeAttendancePage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
-  const { date, courseId, section, time } = searchParams;
+  const { date, courseId, section, time } = await searchParams;
 
   const session = await auth();
 
