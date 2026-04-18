@@ -39,6 +39,7 @@ export default async function CoursesPage() {
           name: true,
         },
       },
+      Enrollment: true,
     },
   });
   const availableCourses = await db.course.findMany({
@@ -55,6 +56,7 @@ export default async function CoursesPage() {
           name: true,
         },
       },
+      Enrollment: true,
     },
   });
 
