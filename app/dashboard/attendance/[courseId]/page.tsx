@@ -1,17 +1,14 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { StudentAttendanceTable } from "./student-attendance-table";
-import type { PageProps } from "next";
 
 export const runtime = "nodejs";
 
-type Params = Promise<{ courseId: string }>;
-
 export default async function AttendanceDetailPage({
   params,
-}: PageProps<{
-  params: Params;
-}>) {
+}: {
+  params: Promise<{ courseId: string }>;
+}) {
   const session = await auth();
 
   const { courseId } = await params; // ✅ MUST await

@@ -1,19 +1,16 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/prisma";
 import TakeAttendanceForm from "./take-attendance-form";
-import type { PageProps } from "next";
 
 interface SearchParams {
   [key: string]: string;
 }
 
-type SearchParamsPromise = Promise<SearchParams>;
-
 export default async function TakeAttendancePage({
   searchParams,
-}: PageProps<{
-  searchParams: SearchParamsPromise;
-}>) {
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
   const { date, courseId, section, time } = await searchParams;
 
   const session = await auth();
