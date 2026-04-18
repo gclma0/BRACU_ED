@@ -5,11 +5,13 @@ import type { PageProps } from "next";
 
 export const runtime = "nodejs";
 
+type Params = Promise<{ courseId: string }>;
+
 export default async function AttendanceDetailPage({
   params,
-}: PageProps & {
-  params: Promise<{ courseId: string }>;
-}) {
+}: PageProps<{
+  params: Params;
+}>) {
   const session = await auth();
 
   const { courseId } = await params; // ✅ MUST await

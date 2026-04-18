@@ -6,11 +6,13 @@ import FacultyView from "./faculty-view";
 import StudentView from "./student-view";
 import type { PageProps } from "next";
 
+type Params = Promise<{ courseId: string }>;
+
 export default async function CourseIdPage({
   params,
-}: PageProps & {
-  params: Promise<{ courseId: string }>;
-}) {
+}: PageProps<{
+  params: Params;
+}>) {
   const session = await auth();
   const { courseId } = await params;
 
