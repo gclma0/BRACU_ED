@@ -2,13 +2,14 @@ import { db } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { StudentAttendanceTable } from "./student-attendance-table";
 
-export default async function AttendanceDetailPage({
-  params,
-}: {
-  params: { courseId: string };
-}) {
+type Props = {
+  params: Promise<{ courseId: string }>;
+};
+
+export default async function AttendanceDetailPage({ params }: Props) {
   const session = await auth();
-  const courseId = params.courseId;
+
+  const { courseId } = await params; // ✅ FIXED
 
   // Fetch course with attendance records
   const course = await db.course.findUnique({
