@@ -76,6 +76,7 @@ export default function LogInForm() {
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
+                        id="email"
                         type="email"
                         autoComplete="email"
                         placeholder="Enter your email"
@@ -94,7 +95,8 @@ export default function LogInForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
+                      <Iid="password"
+                        nput
                         type="password"
                         autoComplete="current-password"
                         placeholder="Create a password"

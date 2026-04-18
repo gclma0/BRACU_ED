@@ -128,6 +128,7 @@ export default function RegisterForm() {
                     <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input
+                        id="name"
                         autoComplete="name"
                         placeholder="Enter your name"
                         {...field}
@@ -145,7 +146,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input
+                      <Iid="email"
+                        nput
                         type="email"
                         autoComplete="email"
                         placeholder="Enter your email"
@@ -164,7 +166,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
+                      <Iid="password"
+                        nput
                         type="password"
                         autoComplete="new-password"
                         placeholder="Create a password"
