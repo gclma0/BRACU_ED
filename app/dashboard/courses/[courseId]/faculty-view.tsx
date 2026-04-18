@@ -35,14 +35,18 @@ type AssignmentWithCourseWithSubmission = Assignment & {
   })[];
 };
 
+type SubmissionWithStudent = Submission & {
+  student: Profile;
+};
+
 export default function FacultyView({
   assignments,
 }: {
   assignments: AssignmentWithCourseWithSubmission[];
 }) {
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [submissions, setSubmissions] = useState<SubmissionWithStudent[]>([]);
   const [selectedSubmission, setSelectedSubmission] =
-    useState<Submission | null>(null);
+    useState<SubmissionWithStudent | null>(null);
   const [gradeDetails, setGradeDetails] = useState({
     grade: 0,
     feedback: "",
