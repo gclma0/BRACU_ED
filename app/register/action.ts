@@ -18,25 +18,36 @@ export async function RegisterAction(values: TSignUpFormSchema) {
 
     const { email, name, password, userRole } = validation.data;
 
-    const userExist = await db.profile.findUnique({
-      where: { email },
-    });
+    try {
+      const userExist = await db.profile.findUnique({
+        where: { email },
+      });
 
-    if (userExist) return { error: "Email already exist." };
+      if (userExist) return { error: "Email already exist." };
+    } catch (dbError) {
+      console.error("Database error checking email:", dbError);
+      return { error: "Unable to check email. Please try again." };
+    }
 
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
 
-    await db.profile.create({
-      data: {
-        name,
-        email,
-        password: hashPassword,
-        role: userRole,
-      },
-    });
-    return { success: "Account created successfully." };
+    try {
+      await db.profile.create({
+        data: {
+          name,
+          email,
+          password: hashPassword,
+          role: userRole,
+        },
+      });
+      return { success: "Account created successfully." };
+    } catch (createError) {
+      console.error("Database error creating user:", createError);
+      return { error: "Unable to create account. Please try again." };
+    }
   } catch (err) {
-    return { error: "Something went wrong.", err };
+    console.error("Registration error:", err);
+    return { error: "Something went wrong. Please try again." };
   }
-}
+}}

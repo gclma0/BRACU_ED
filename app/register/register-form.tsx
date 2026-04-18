@@ -146,8 +146,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Iid="email"
-                        nput
+                      <Input
+                        id="email"
                         type="email"
                         autoComplete="email"
                         placeholder="Enter your email"

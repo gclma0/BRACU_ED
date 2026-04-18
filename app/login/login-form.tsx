@@ -95,11 +95,11 @@ export default function LogInForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Iid="password"
-                        nput
+                      <Input
+                        id="password"
                         type="password"
                         autoComplete="current-password"
-                        placeholder="Create a password"
+                        placeholder="Enter your password"
                         {...field}
                       />
                     </FormControl>
