@@ -4,10 +4,11 @@ import AddAssignment from "./add-assignment";
 import { db } from "@/lib/prisma";
 import FacultyView from "./faculty-view";
 import StudentView from "./student-view";
+import type { PageProps } from "next";
 
 export default async function CourseIdPage({
   params,
-}: {
+}: PageProps & {
   params: Promise<{ courseId: string }>;
 }) {
   const session = await auth();
