@@ -50,4 +50,4 @@ export async function RegisterAction(values: TSignUpFormSchema) {
     console.error("Registration error:", err);
     return { error: "Something went wrong. Please try again." };
   }
-}}
+}
