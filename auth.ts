@@ -11,9 +11,11 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 }
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   pages: {
-    signIn: "/sign-in",
+    signIn: "/login",
   },
   callbacks: {
     async session({ token, session }) {
@@ -28,6 +30,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
     async jwt({ token }) {
+      if (!token.sub) return token;
+      const userExist = await db.profile.findFirst({
+        where: { id: token.sub },
+      });
+      if (!userExist) return token;
+      token.role = userExist.role;
+      token.name = userExist.name;
+      return token;
+    },
+  },
+
+  adapter: PrismaAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
+});
       if (!token.sub) return token;
       const userExist = await db.profile.findFirst({
         where: { id: token.sub },
