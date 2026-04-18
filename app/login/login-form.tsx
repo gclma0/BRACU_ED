@@ -47,6 +47,7 @@ export default function LogInForm() {
     onSuccess: (data) => {
       if (data.success) {
         form.reset();
+        window.location.href = "/dashboard";
       }
     },
   });

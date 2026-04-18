@@ -8,17 +8,22 @@ export default {
   providers: [
     Credentials({
       async authorize(credentials) {
-        const validation = signInFormSchema.safeParse(credentials);
-        if (validation.success) {
-          const { email, password } = validation.data;
-          const user = await db.profile.findFirst({
-            where: { email },
-          });
-          if (!user) return null;
-          const matchPassword = await bcrypt.compare(password, user.password);
-          if (matchPassword) return user;
+        try {
+          const validation = signInFormSchema.safeParse(credentials);
+          if (validation.success) {
+            const { email, password } = validation.data;
+            const user = await db.profile.findFirst({
+              where: { email },
+            });
+            if (!user) return null;
+            const matchPassword = await bcrypt.compare(password, user.password);
+            if (matchPassword) return user;
+          }
+          return null;
+        } catch (error) {
+          console.error("Error in authorize function:", error);
+          return null;
         }
-        return null;
       },
     }),
   ],

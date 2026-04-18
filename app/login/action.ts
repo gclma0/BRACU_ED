@@ -16,14 +16,11 @@ export async function LogInAction(values: TSignInFormSchema) {
     }
     const { email, password } = validation.data;
 
-    await db.profile.findUnique({
-      where: { email },
-    });
-
-    await signIn("credentials", {
+    // Attempt to sign in without redirect
+    const result = await signIn("credentials", {
       email,
       password,
-      redirectTo: "/",
+      redirect: false,
     });
 
     return { success: "Log in successful." };

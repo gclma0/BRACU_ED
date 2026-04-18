@@ -1,6 +1,5 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "./lib/prisma";
 import authConfig from "./auth.config";
 
@@ -26,22 +25,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (token.role && session.user) {
         session.user.role = token.role as string;
       }
-      session.user.name = token.name;
+
+      if (token.name && session.user) {
+        session.user.name = token.name;
+      }
+
       return session;
     },
     async jwt({ token }) {
       if (!token.sub) return token;
-      const userExist = await db.profile.findFirst({
-        where: { id: token.sub },
-      });
-      if (!userExist) return token;
-      token.role = userExist.role;
-      token.name = userExist.name;
+
+      try {
+        const userExist = await db.profile.findFirst({
+          where: { id: token.sub },
+        });
+        if (!userExist) return token;
+        token.role = userExist.role;
+        token.name = userExist.name;
+      } catch (error) {
+        console.error("Error fetching user in JWT callback:", error);
+        // Return token without additional data if database query fails
+      }
+
       return token;
     },
   },
 
-  adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,
 });
